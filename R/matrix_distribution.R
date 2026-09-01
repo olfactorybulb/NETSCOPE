@@ -1,0 +1,59 @@
+#' Get distribution of data in a matrix
+#'
+#' For a matrix too large to load completely into memory, a disk-backed
+#' \pkg{bigmemory} matrix file can be specified instead, so the data is
+#' read and processed in row batches. This function assumes the data is
+#' confined to the interval \code{[0, 1]}.
+#'
+#' @param file Optional path to a \pkg{bigmemory} disk-backed matrix (the
+#'   same \code{file} base path/naming convention used by
+#'   \code{compute_MI_PP()}: \code{paste0(basename(file), ".desc")} is
+#'   attached via \code{bigmemory::attach.big.matrix()}). Required if
+#'   \code{mat} is not specified.
+#' @param mat Optional in-memory matrix. Required if \code{file} is not
+#'   specified.
+#' @param batch Batch size for reading rows at a time. Default 4000.
+#' @param bins Number of bins used for counting. Default 1000.
+#'
+#' @return A list with:
+#'   \item{px}{Data distribution -- vector of bin counts.}
+#'   \item{ex}{Bin edges.}
+#'
+#' @section Deviations from the MATLAB source:
+#' The \code{file} argument no longer refers to a MATLAB \code{.mat} file
+#' -- there's no straightforward way to read a \code{.mat} file in batches
+#' from R without loading it entirely into memory first, which would
+#' defeat this function's purpose. Instead, \code{file} refers to one of
+#' this package's own \pkg{bigmemory}-backed matrices (as used elsewhere,
+#' e.g. by \code{compute_MI_PP()}). The \code{varname} argument from the
+#' MATLAB version is dropped entirely, since a \pkg{bigmemory} backing file
+#' holds exactly one matrix (no named-variable selection needed, unlike a
+#' MATLAB \code{.mat} file which can hold several).
+#'
+#' @family other
+#' @export
+matrix_distribution <- function(file = NULL, mat = NULL, batch = 4000, bins = 1000) {
+  if (!is.null(file)) {
+    backing_dir <- dirname(normalizePath(file, mustWork = FALSE))
+    descriptor_file <- paste0(basename(file), ".desc")
+    m <- bigmemory::attach.big.matrix(file.path(backing_dir, descriptor_file))
+  } else if (!is.null(mat)) {
+    m <- mat
+  } else {
+    stop("Either 'file' or 'mat' must be provided")
+  }
+
+  dim_m <- dim(m)
+
+  # Count data
+  ex <- seq(0, 1, length.out = bins + 1)
+  px <- numeric(bins)
+
+  for (i in seq(1, dim_m[1], by = batch)) {
+    rows <- i:min(i + batch - 1, dim_m[1])
+    msub <- m[rows, seq_len(dim_m[2])]
+    px <- px + .hist_counts(as.vector(msub), ex)
+  }
+
+  list(px = px, ex = ex)
+}
