@@ -61,3 +61,21 @@
 #'
 #' @keywords internal
 .netscope_pp_state <- new.env(parent = emptyenv())
+
+#' MATLAB-compatible interquartile range
+#'
+#' Computes the IQR using the same quantile interpolation method as
+#' MATLAB's \code{iqr()}/\code{prctile()} (equivalent to R's quantile
+#' type 5), rather than base R's \code{stats::IQR()} default (type 7).
+#' This matters for Freedman-Diaconis bin-width calculations downstream,
+#' where even small IQR differences cascade into different bin edges,
+#' histogram counts, and ultimately different MI values.
+#'
+#' @param x Numeric vector.
+#'
+#' @return Numeric scalar: Q3 - Q1 using type-5 quantiles.
+#' @keywords internal
+.iqr_matlab <- function(x) {
+  q <- stats::quantile(x, c(0.25, 0.75), type = 5, names = FALSE)
+  q[2] - q[1]
+}
