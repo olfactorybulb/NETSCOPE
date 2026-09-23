@@ -1,14 +1,29 @@
 Package: NETSCOPE
-Title: What the Package Does (One Line, Title Case)
+Title: Information-Theoretic Network Construction and Analysis
 Version: 0.0.0.9000
-Authors@R:
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+    person("Tansu", "Celikel", role = "aut"),
+    person("Dingjing", "Shi", role = "aut"),
+    person("Chih-Chia", "Hsing", email = "jesscc.hsing@gmail.com",
+           role = c("aut", "cre")),
+    person("Tido", "Bergmans", role = "aut"),
+    person("Tousif", "Jamal", role = "aut"),
+    person("Aya", "Rezeika", role = "aut")
+    )
+Description: Provides tools for constructing and analyzing networks using
+    information-theoretic measures. The package estimates mutual information
+    from continuous data, supports permutation-based network sparsification,
+    and provides functions for network topology and path analysis. Batch and
+    parallel processing are available for larger datasets.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
+Imports:
+    bigmemory,
+    future,
+    stats,
+    xml2
 Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

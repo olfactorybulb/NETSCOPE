@@ -43,7 +43,7 @@ kshortestpaths <- function(mi, K, source, target) {
       }
 
       # Remove root path nodes (except the spur node itself) from the graph
-      trim_idx <- head(rootPath, -1)
+      trim_idx <- utils::head(rootPath, -1)
       mi1[trim_idx, ] <- 0
       mi1[, trim_idx] <- 0
 
@@ -51,7 +51,7 @@ kshortestpaths <- function(mi, K, source, target) {
       spurCost <- spur$d
       spurPath <- spur$paths[[1]]
 
-      totalPath <- c(rootPath, tail(spurPath, -1))
+      totalPath <- c(rootPath, utils::tail(spurPath, -1))
       totalCost <- rootCost + spurCost
 
       B[[length(B) + 1]] <- totalPath
@@ -68,7 +68,7 @@ kshortestpaths <- function(mi, K, source, target) {
     }
 
     ksp <- which.min(Bc)
-    if (length(B) == 0 || tail(B[[ksp]], 1) != target) {
+    if (length(B) == 0 || utils::tail(B[[ksp]], 1) != target) {
       message(sprintf("Found %d paths.", k + 1))
       break
     } else {
