@@ -1,9 +1,9 @@
-# MIGM
+# NETSCOPE
 
 An R package for information theoretical analysis of molecular networks.
 This is an R port of the original [NETSCOPE MATLAB/Octave/Python
 toolbox](https://github.com/DepartmentofNeurophysiology/NETSCOPE), ported
-from the toolbox's master branch.
+from the toolbox's master branch with help from Claude.
 
 ## Introduction
 
@@ -25,7 +25,7 @@ Install directly from GitHub:
 
 ```r
 # install.packages("devtools")
-devtools::install_github("olfactorybulb/MIGM")
+devtools::install_github("olfactorybulb/NETSCOPE")
 ```
 
 ## Documentation
@@ -64,7 +64,7 @@ submission)*
 ## Author
 
 This R port is maintained at the [Georgia Institute of Technology, School
-of Psychology](https://github.com/olfactorybulb).
+of Psychology and Brain Sciences](https://github.com/olfactorybulb).
 
 ---
 

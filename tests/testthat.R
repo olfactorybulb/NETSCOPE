@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(MIGM)
+library(NETSCOPE)
 
-test_check("MIGM")
+test_check("NETSCOPE")
