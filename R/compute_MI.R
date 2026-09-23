@@ -13,15 +13,29 @@
 #' @param h Optional numeric vector of per-variable entropies, as produced by
 #'   \code{get_entropy()}. Computed if not supplied.
 #'
-#' @return MI matrix, normalized with respect to joint entropy.
+#' @return A symmetric numeric matrix containing pairwise MI values,
+#'   normalized with respect to joint entropy.
 #'
 #' @seealso compute_MI_batch, normalize_MI
 #'
 #' @examples
-#' \dontrun{
+#' # Create a small example dataset with variables in rows and samples in columns
+#' set.seed(123)
+#' data <- matrix(rnorm(300), nrow = 3)
+#'
+#' # Compute the MI matrix
 #' mi <- compute_MI(data)
-#' mi <- compute_MI(data, px = px_data, ex = ex_data)
-#' }
+#' mi
+#'
+#' # Alternatively, supply precomputed distributions and entropies
+#' distributions <- get_distributions(data)
+#' h <- get_entropy(distributions$px)
+#' mi <- compute_MI(
+#'   data,
+#'   px = distributions$px,
+#'   ex = distributions$ex,
+#'   h = h
+#' )
 #'
 #' @export
 compute_MI <- function(data, px = NULL, ex = NULL, h = NULL) {

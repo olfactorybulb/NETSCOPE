@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_entropy.R
 \name{get_entropy}
 \alias{get_entropy}
-\title{Compute entropy from data distributions}
+\title{Compute entropy from probability distributions}
 \usage{
 get_entropy(px)
 }
@@ -11,11 +11,13 @@ get_entropy(px)
 \code{get_distributions()}.}
 }
 \value{
-Numeric vector with the entropy of each variable.
+Numeric vector containing the entropy of each variable.
 }
 \description{
-Compute entropy from data distributions
+Computes the Shannon entropy of each variable from its probability
+distribution. Entropy is calculated using the natural logarithm and is
+therefore expressed in nats.
 }
 \seealso{
-get_distributions
+\code{get_distributions}
 }

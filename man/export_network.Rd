@@ -29,17 +29,17 @@ edge property is inferred from the shape of \code{data}: a
 length-\code{N} vector (or \code{1 x N} / \code{N x 1} matrix) is a
 node property; an \code{N x N} matrix is an edge property.
 
-Limitation (matches source): node data cannot be named \code{"id"} or
-\code{"label"}, and edge data cannot be named \code{"id"},
-\code{"source"}, \code{"target"}, or \code{"weight"}. Not validated.}
+Node data cannot be named \code{"id"} or \code{"label"}, and edge data
+cannot be named \code{"id"}, \code{"source"}, \code{"target"}, or
+\code{"weight"}.}
 }
 \value{
-\code{NULL}, invisibly. Called for its side effect of writing
-\code{filename}.
+\code{NULL}, invisibly. This function is called for its side
+effect of writing the network to \code{filename}.
 }
 \description{
-Export a network to a GEXF (XML) file that can be loaded by network
-visualization software, Gephi in particular.
+Exports a network to a GEXF (XML) file that can be loaded by network
+visualization software such as Gephi.
 }
 \seealso{
 Other networkanalysis: 

@@ -14,10 +14,9 @@
 #'   contains at least one of the search terms as a substring.
 #'
 #' @examples
-#' \dontrun{
-#' # Returns indices of any gene names containing 'abc' OR 'def'
-#' findvar(gene_list, "abc", "def")
-#' }
+#' vars <- c("alpha", "beta", "alphabet", "gamma")
+#' findvar(vars, "alpha")
+#' findvar(vars, "alpha", "gamma")
 #'
 #' @family other
 #' @export

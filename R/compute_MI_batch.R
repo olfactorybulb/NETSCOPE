@@ -25,16 +25,22 @@
 #'   to the existing backing file instead of reallocating). Default
 #'   \code{FALSE}.
 #'
-#' @return Invisibly, the \code{big.matrix} object backing the result file.
-#'   (The MI values themselves live on disk at \code{<file>.bin}.)
+#' @return Invisibly, a \code{big.matrix} object containing the disk-backed
+#'   MI matrix. The matrix data are stored at \code{<file>.bin}.
 #'
-#' @seealso compute_MI, normalize_MI
+#' @seealso \code{compute_MI}, \code{normalize_MI}
 #'
 #' @examples
-#' \dontrun{
-#' compute_MI_batch(data, "result", batch = 2000)
-#' compute_MI_batch(data, "result", pp = TRUE, fetch = FALSE)
-#' }
+#' # Create a small example dataset
+#' set.seed(123)
+#' data <- matrix(rnorm(300), nrow = 3)
+#'
+#' # Store the disk-backed MI matrix in a temporary directory
+#' file <- file.path(tempdir(), "netscope_mi")
+#' mi <- compute_MI_batch(data, file, batch = 2)
+#'
+#' # Access the resulting matrix
+#' mi[, ]
 #'
 #' @export
 compute_MI_batch <- function(data, file, px = NULL, ex = NULL, h = NULL,

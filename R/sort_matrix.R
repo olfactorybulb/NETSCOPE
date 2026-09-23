@@ -1,8 +1,8 @@
 #' Sort network nodes by similarity in connectivity
 #'
-#' Uses PCA to find similarities in the connectivity profiles of nodes,
-#' then sorts nodes so that ones associated with the same principal
-#' component(s) end up next to each other.
+#' Uses PCA to identify similarities in the connectivity profiles of nodes,
+#' then sorts nodes so that those associated with the same principal
+#' component(s) are placed next to each other.
 #'
 #' @param mi MI/network matrix (\code{N} by \code{N}).
 #' @param ncomps Optional number of components to use (to refine sorting).
@@ -17,18 +17,12 @@
 #'     on, ranked highest first. Disconnected nodes get a row of \code{NA}
 #'     and sort to the end.}
 #'
-#' @section Important: PCA sign ambiguity affects sort order.
-#' Principal components are only defined up to an arbitrary sign flip --
-#' this is a property of PCA itself, not specific to any one
-#' implementation. Since this function ranks each node's components by
-#' \emph{signed} score (highest first), a component that comes out
-#' sign-flipped between MATLAB's \code{pca()} and R's \code{prcomp()} could
-#' genuinely produce a different node ordering in the two languages, even
-#' with an entirely correct translation. If exact node-order parity with
-#' MATLAB ever matters here, this is the first thing to check --
-#' comparing e.g. absolute values or the underlying variance explained,
-#' rather than exact order/rank, may be a more meaningful comparison than
-#' checking for an identical \code{order} output.
+#' @section PCA sign ambiguity:
+#' Principal components are defined only up to an arbitrary sign flip.
+#' Because this function ranks components using signed PCA scores, the
+#' resulting node order may differ across PCA implementations even when
+#' the underlying PCA solutions are equivalent. Therefore, exact node
+#' ordering may not be reproducible across different PCA implementations.
 #'
 #' @family networkanalysis
 #' @export

@@ -18,6 +18,13 @@
 #'
 #' @keywords internal
 .hist_counts <- function(x, edges) {
+  if (length(edges) == 1L) {
+    nb <- as.integer(edges)
+    counts <- integer(nb)
+    counts[ceiling(nb / 2)] <- length(x)
+    return(counts)
+  }
+
   nb <- length(edges) - 1
   idx <- findInterval(x, edges, rightmost.closed = TRUE)
   idx <- idx[idx >= 1 & idx <= nb]

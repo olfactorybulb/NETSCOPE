@@ -20,7 +20,8 @@ Required if \code{px} is supplied.}
 \code{get_entropy()}. Computed if not supplied.}
 }
 \value{
-MI matrix, normalized with respect to joint entropy.
+A symmetric numeric matrix containing pairwise MI values,
+normalized with respect to joint entropy.
 }
 \description{
 Computes an MI matrix where each entry (i, j) is the mutual information
@@ -28,10 +29,23 @@ between variables i and j. Intended for datasets small enough to fit in
 memory, where no parallel/batch processing is needed.
 }
 \examples{
-\dontrun{
+# Create a small example dataset with variables in rows and samples in columns
+set.seed(123)
+data <- matrix(rnorm(300), nrow = 3)
+
+# Compute the MI matrix
 mi <- compute_MI(data)
-mi <- compute_MI(data, px = px_data, ex = ex_data)
-}
+mi
+
+# Alternatively, supply precomputed distributions and entropies
+distributions <- get_distributions(data)
+h <- get_entropy(distributions$px)
+mi <- compute_MI(
+  data,
+  px = distributions$px,
+  ex = distributions$ex,
+  h = h
+)
 
 }
 \seealso{

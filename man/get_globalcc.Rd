@@ -10,7 +10,8 @@ get_globalcc(mi)
 \item{mi}{MI/network matrix.}
 }
 \value{
-A single number, the global clustering coefficient.
+A numeric scalar giving the global clustering coefficient as
+defined in the normalization section below.
 }
 \description{
 Counts triangles in the network (each triangle counted exactly once, via
@@ -20,14 +21,13 @@ the total number of possible node triples.
 }
 \section{Note on normalization}{
 
-This divides the triangle count by \code{choose(n, 3)} -- the total
-number of possible node triples in the network, whether connected or
-not. The standard "global clustering coefficient" / transitivity
-formula in the literature instead divides by the number of \emph{connected}
-triples (paths of length 2), which is a different quantity. Ported
-as-is from source; the resulting value won't be directly comparable to
-clustering coefficients reported by other tools using the standard
-formula.
+This function divides the triangle count by \code{choose(n, 3)}, the total
+number of possible node triples in the network, whether connected or not.
+This differs from the standard global clustering coefficient (transitivity),
+which normalizes by the number of connected triples (paths of length 2).
+Therefore, values returned by this function are not directly comparable
+with clustering coefficients computed using the standard transitivity
+definition.
 }
 
 \seealso{

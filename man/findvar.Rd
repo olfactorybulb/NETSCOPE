@@ -24,10 +24,9 @@ Find variables by matching (parts of) names, case-insensitively, and
 return the results as list indices.
 }
 \examples{
-\dontrun{
-# Returns indices of any gene names containing 'abc' OR 'def'
-findvar(gene_list, "abc", "def")
-}
+vars <- c("alpha", "beta", "alphabet", "gamma")
+findvar(vars, "alpha")
+findvar(vars, "alpha", "gamma")
 
 }
 \seealso{

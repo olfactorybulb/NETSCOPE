@@ -15,11 +15,11 @@
 #'   giving the normalized betweenness centrality of each node.
 #'
 #' @section On \code{igraph}:
-#' This is algorithmically equivalent to \code{igraph::betweenness()}, but
-#' is NOT swapped in here, since the edge-weight convention
-#' \code{shortestpath()} uses to turn MI values into path "distances" isn't
-#' known yet (e.g. whether it inverts or log-transforms MI). Revisit once
-#' \code{shortestpath.m} has been reviewed.
+#' This calculation is conceptually similar to
+#' \code{igraph::betweenness()}, but retains the original NETSCOPE
+#' implementation to preserve its shortest-path convention. Edge weights
+#' are converted from MI similarity to distance as
+#' \code{(1 - mi) / mi} before shortest paths are calculated.
 #'
 #' @seealso \code{shortestpath}, \code{get_localcc}
 #' @family networkanalysis

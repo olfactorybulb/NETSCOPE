@@ -1,11 +1,13 @@
-#' Column-wise shuffle the data matrix
+#' Shuffle variables within each sample
 #'
-#' Shuffle each column of the data matrix to remove any correlations between
-#' variables but preserve the sample-specific profiles.
+#' Randomly permutes the values across variables within each column of the
+#' data matrix. Each column is shuffled independently, preserving the set
+#' of observed values within each sample while changing their assignment
+#' to variables.
 #'
 #' @param data Data matrix (rows are variables, columns are samples).
 #'
-#' @return Shuffled data matrix, same dimensions as \code{data}.
+#' @return Shuffled data matrix with the same dimensions as \code{data}.
 #'
 #' @family expressiondata
 #' @export

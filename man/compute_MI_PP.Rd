@@ -33,9 +33,4 @@ Internal function called from \code{compute_MI_batch()} when
 collect the results (possibly from a separate call, mirroring MATLAB's
 background \code{parfeval} pool).
 }
-\section{Unresolved dependencies}{
-
-Calls \code{fetch_results()}, not yet translated from source.
-}
-
 \keyword{internal}

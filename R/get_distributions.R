@@ -1,4 +1,4 @@
-#' Compute probability distributions of gene expression data
+#' Compute probability distributions from continuous data
 #'
 #' Computes the data distribution per variable across samples, by binning
 #' and counting the levels. Bins are determined by either Sturges' rule or
@@ -19,9 +19,8 @@
 #' @details
 #' The Freedman-Diaconis bin width uses a MATLAB-compatible IQR
 #' (\code{.iqr_matlab()}, quantile type 5) rather than base R's
-#' \code{stats::IQR()} (type 7), to numerically match the original
-#' MATLAB/NETSCOPE \code{iqr()}/\code{prctile()} behavior. See
-#' \code{VALIDATION_STATUS.md} for the discrepancy this fix addresses.
+#' \code{stats::IQR()} (type 7), to maintain numerical compatibility with
+#' the MATLAB implementation of NETSCOPE.
 #'
 #' @seealso get_entropy
 #'
@@ -37,10 +36,7 @@ get_distributions <- function(data, binning = "freedman", log = FALSE) {
   for (i in seq_len(nvars)) {
     if (sum(data[i, ]) == 0) next
     if (grepl("freedman", tolower(binning))) {
-      # Freedman-Diaconis rule to calculate bin width.
-      # NOTE: uses .iqr_matlab() (quantile type 5), NOT stats::IQR()
-      # (type 7), to match MATLAB's iqr()/prctile() exactly. See
-      # VALIDATION_STATUS.md for why this matters.
+      # Use MATLAB-compatible IQR (quantile type 5) for numerical consistency.
       iqr_value <- .iqr_matlab(data[i, ])
       bin_width <- 2 * iqr_value / bin_factor
       # Handle edge cases

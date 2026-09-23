@@ -44,8 +44,8 @@ to the existing backing file instead of reallocating). Default
 \code{FALSE}.}
 }
 \value{
-Invisibly, the \code{big.matrix} object backing the result file.
-(The MI values themselves live on disk at \code{<file>.bin}.)
+Invisibly, a \code{big.matrix} object containing the disk-backed
+MI matrix. The matrix data are stored at \code{<file>.bin}.
 }
 \description{
 Computes a normalized MI matrix where each entry (i, j) is the MI
@@ -56,12 +56,18 @@ the result in a disk-backed matrix (via \pkg{bigmemory}). Optionally uses
 parallel processing (via the \pkg{future} ecosystem).
 }
 \examples{
-\dontrun{
-compute_MI_batch(data, "result", batch = 2000)
-compute_MI_batch(data, "result", pp = TRUE, fetch = FALSE)
-}
+# Create a small example dataset
+set.seed(123)
+data <- matrix(rnorm(300), nrow = 3)
+
+# Store the disk-backed MI matrix in a temporary directory
+file <- file.path(tempdir(), "netscope_mi")
+mi <- compute_MI_batch(data, file, batch = 2)
+
+# Access the resulting matrix
+mi[, ]
 
 }
 \seealso{
-compute_MI, normalize_MI
+\code{compute_MI}, \code{normalize_MI}
 }

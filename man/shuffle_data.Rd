@@ -2,7 +2,7 @@
 % Please edit documentation in R/shuffle_data.R
 \name{shuffle_data}
 \alias{shuffle_data}
-\title{Column-wise shuffle the data matrix}
+\title{Shuffle variables within each sample}
 \usage{
 shuffle_data(data)
 }
@@ -10,10 +10,12 @@ shuffle_data(data)
 \item{data}{Data matrix (rows are variables, columns are samples).}
 }
 \value{
-Shuffled data matrix, same dimensions as \code{data}.
+Shuffled data matrix with the same dimensions as \code{data}.
 }
 \description{
-Shuffle each column of the data matrix to remove any correlations between
-variables but preserve the sample-specific profiles.
+Randomly permutes the values across variables within each column of the
+data matrix. Each column is shuffled independently, preserving the set
+of observed values within each sample while changing their assignment
+to variables.
 }
 \concept{expressiondata}

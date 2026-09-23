@@ -13,12 +13,11 @@
 #'   a list of paths, a numeric vector of pathlengths, one per path.
 #'
 #' @section Note:
-#' Unlike \code{shortestpath()}, this function does NOT clamp \code{mi}
-#' values above 1 down to 1 before computing distances. If \code{mi} can
-#' ever contain values slightly over 1 (e.g. from normalization rounding),
-#' this could disagree slightly with distances computed inside
-#' \code{shortestpath()}/\code{kshortestpaths()} for the same path. Ported
-#' as-is from source; flagging in case this should be reconciled.
+#' Unlike \code{shortestpath()}, this function does not clamp \code{mi}
+#' values greater than 1 before computing distances. Therefore, if
+#' \code{mi} contains values greater than 1, path lengths returned by this
+#' function may differ from those computed by \code{shortestpath()} for
+#' the same path.
 #'
 #' @seealso \code{shortestpath}, \code{kshortestpaths}
 #' @family networkanalysis

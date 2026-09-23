@@ -1,37 +1,20 @@
-#' Calculate K shortest paths (KSPs) in a graph using Yen's algorithm
+#' Calculate K shortest paths in a graph using Yen's algorithm
 #'
-#' See \code{shortestpath()} for details on how a single shortest path is
-#' defined and computed.
+#' Computes up to \code{K} loopless shortest paths between a source and
+#' target node using Yen's algorithm. See \code{shortestpath()} for details
+#' on how path lengths and individual shortest paths are computed.
 #'
 #' @param mi MI/network matrix.
-#' @param K Number of shortest paths to find.
+#' @param K Maximum number of shortest paths to find.
 #' @param source Source node index (1-based).
 #' @param target Target node index (1-based, single node).
 #'
 #' @return A list with:
-#'   \item{d}{Path lengths for each of the (up to) \code{K} paths found.}
-#'   \item{A}{A list of (up to) \code{K} integer vectors, each a path from
-#'     \code{source} to \code{target}. If fewer than \code{K} loopless paths
-#'     exist, remaining entries are left as \code{NULL} (MATLAB's
-#'     equivalent: unused preallocated cells stay empty).}
-#'
-#' @section Unresolved dependencies:
-#' Calls \code{get_pathlength()}, not yet translated. Two different call
-#' patterns are assumed here, both needing to be checked once that file is
-#' ported: \code{get_pathlength(mi, single_path_vector)} returning one
-#' number, and \code{get_pathlength(mi, list_of_paths)} returning a vector
-#' of costs (one per path, skipping/ignoring any \code{NULL} entries in
-#' \code{A} if fewer than \code{K} paths were found).
-#'
-#' @section A recurring translation gotcha:
-#' MATLAB's \code{a:b} returns an empty vector when \code{a > b} (e.g.
-#' \code{2:1} is \code{[]}). R's \code{2:1} instead returns \code{c(2, 1)} --
-#' a real, non-empty, backwards sequence. This file leans on that MATLAB
-#' behavior in several spots (trimming a path down to "all but the last
-#' node", "all but the first node", and looping "for each node except the
-#' last one"). Each spot is replaced below with \code{seq_len()}, or with
-#' \code{head(x, -1)} / \code{tail(x, -1)} for the trims, both of which
-#' correctly produce an empty result instead of a reversed one.
+#'   \item{d}{Numeric vector containing the path lengths for each of the
+#'     (up to) \code{K} paths found.}
+#'   \item{A}{List of (up to) \code{K} integer vectors, each representing
+#'     a path from \code{source} to \code{target}. If fewer than \code{K}
+#'     loopless paths exist, remaining entries are \code{NULL}.}
 #'
 #' @seealso \code{shortestpath}
 #' @family networkanalysis

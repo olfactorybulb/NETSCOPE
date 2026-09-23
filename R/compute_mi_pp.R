@@ -18,9 +18,6 @@
 #'   right away and leave jobs running in the background.
 #' @param cont Whether to continue from a previous, unfinished run.
 #'
-#' @section Unresolved dependencies:
-#' Calls \code{fetch_results()}, not yet translated from source.
-#'
 #' @keywords internal
 compute_MI_PP <- function(data, file, px, ex, h, batch, fetch, cont) {
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_distributions.R
 \name{get_distributions}
 \alias{get_distributions}
-\title{Compute probability distributions of gene expression data}
+\title{Compute probability distributions from continuous data}
 \usage{
 get_distributions(data, binning = "freedman", log = FALSE)
 }
@@ -30,9 +30,8 @@ entropy and mutual-information computations.
 \details{
 The Freedman-Diaconis bin width uses a MATLAB-compatible IQR
 (\code{.iqr_matlab()}, quantile type 5) rather than base R's
-\code{stats::IQR()} (type 7), to numerically match the original
-MATLAB/NETSCOPE \code{iqr()}/\code{prctile()} behavior. See
-\code{VALIDATION_STATUS.md} for the discrepancy this fix addresses.
+\code{stats::IQR()} (type 7), to maintain numerical compatibility with
+the MATLAB implementation of NETSCOPE.
 }
 \seealso{
 get_entropy
