@@ -73,7 +73,8 @@ compute_MI_PP <- function(data, file, px, ex, h, batch, fetch, cont) {
 
       job <- future::future(
         process_batch(tempfile_path, ix, jx),
-        seed = TRUE
+        seed = TRUE,
+        packages = "MIGM"
       )
       jobs[[length(jobs) + 1]] <- job
     }

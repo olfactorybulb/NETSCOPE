@@ -28,10 +28,6 @@
 #' @return Invisibly, the \code{big.matrix} object backing the result file.
 #'   (The MI values themselves live on disk at \code{<file>.bin}.)
 #'
-#' @section Unresolved dependencies:
-#' This function calls \code{compute_MI_PP()} (parallel path only), which
-#' has not been translated from source yet.
-#'
 #' @seealso compute_MI, normalize_MI
 #'
 #' @examples
