@@ -26,3 +26,15 @@ test_that("get_globalcc handles networks with no and all possible triangles", {
 
   expect_equal(get_globalcc(complete_network), 1)
 })
+
+test_that("GCC definitions are consistent", {
+  mi <- matrix(c(
+    0,   0.8, 0.6, 0,
+    0.8, 0,   0.4, 0.7,
+    0.6, 0.4, 0,   0.5,
+    0,   0.7, 0.5, 0
+  ), nrow = 4, byrow = TRUE)
+
+  expect_equal(get_globalcc(mi), 0.5)
+  expect_equal(sparsify_network(mi)$gcc, get_globalcc(mi))
+})

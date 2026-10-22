@@ -16,7 +16,9 @@ Numeric vector containing the entropy of each variable.
 \description{
 Computes the Shannon entropy of each variable from its probability
 distribution. Entropy is calculated using the natural logarithm and is
-therefore expressed in nats.
+therefore expressed in nats. The choice of logarithm base does not
+affect normalized mutual information, provided the same base is used
+consistently for entropy and mutual information.
 }
 \seealso{
 \code{get_distributions}

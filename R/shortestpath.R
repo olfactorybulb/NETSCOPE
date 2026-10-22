@@ -9,11 +9,9 @@
 #'
 #' @param mi MI/network matrix.
 #' @param source Source node index (1-based).
-#' @param target Optional target node index (1-based). When left at its
-#'   default (\code{-1}, which never matches a real node index), the
-#'   shortest path from \code{source} to every other node is computed
-#'   instead of stopping at a single target — mirroring MATLAB's
-#'   \code{nargin == 2} branch.
+#' @param target Optional target node index (1-based). If omitted
+#'   (default \code{-1}), shortest paths from \code{source} to all
+#'   nodes are computed.
 #'
 #' @return A list with:
 #'   \item{d}{Path length(s) of the shortest path(s). A single number if
@@ -24,12 +22,16 @@
 #'     if a single \code{target} was matched; length \code{n} (one path per
 #'     node) otherwise.}
 #'
+#' @details
+#' MI values are clamped to the interval \code{[0, 1]} before
+#' calculating distances, consistent with \code{get_pathlength()}.
+#' Zero MI values correspond to infinite distances.
+#'
 #' @seealso \code{get_pathlength}, \code{kshortestpaths}, \code{get_dos_matrix}
 #' @family networkanalysis
 #' @export
 shortestpath <- function(mi, source, target = -1) {
-  mi[mi > 1] <- 1
-  vi <- (1 - mi) / mi
+  vi <- .mi_to_distance(mi)
   n <- nrow(vi)
 
   d <- rep(Inf, n)           # distance between source and targets

@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute_MI_batch.R
 \name{compute_MI_batch}
 \alias{compute_MI_batch}
-\title{Compute mutual information (MI) matrix from continuous data, in batches}
+\title{Compute mutual information (MI) matrix from numeric data, in batches}
 \usage{
 compute_MI_batch(
   data,
@@ -13,7 +13,8 @@ compute_MI_batch(
   batch = 1000,
   pp = FALSE,
   fetch = TRUE,
-  cont = FALSE
+  cont = FALSE,
+  binning = "freedman"
 )
 }
 \arguments{
@@ -33,8 +34,7 @@ by \code{get_entropy()}. Computed if not supplied.}
 
 \item{batch}{Batch size. Default \code{1000}.}
 
-\item{pp}{Whether to use parallel processing via \code{compute_MI_PP()}.
-Default \code{FALSE}.}
+\item{pp}{Whether to use parallel processing. Default \code{FALSE}.}
 
 \item{fetch}{Whether to wait for parallel processing to finish before
 returning. Only relevant when \code{pp = TRUE}. Default \code{TRUE}.}
@@ -42,6 +42,9 @@ returning. Only relevant when \code{pp = TRUE}. Default \code{TRUE}.}
 \item{cont}{Whether to continue from a previous, unfinished run (attaches
 to the existing backing file instead of reallocating). Default
 \code{FALSE}.}
+
+\item{binning}{Binning rule: \code{"freedman"} (default) or
+\code{"sturges"}. Used only when \code{px} is NULL.}
 }
 \value{
 Invisibly, a \code{big.matrix} object containing the disk-backed

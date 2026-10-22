@@ -18,19 +18,24 @@ missing.}
 \value{
 Numeric vector of length \code{n} (where \code{n = nrow(mi)})
 giving the normalized betweenness centrality of each node.
+Betweenness counts are divided by \code{n * (n - 1) / 2},
+the total number of unordered node pairs.
 }
 \description{
 For every node, calculate the "betweenness centrality": a measure of how
 important a node's role is in the global network structure, based on how
 often it lies on the shortest path between other pairs of nodes.
 }
-\section{On \code{igraph}}{
+\section{Comparison with \code{igraph}{
 
 This calculation is conceptually similar to
 \code{igraph::betweenness()}, but retains the original NETSCOPE
 implementation to preserve its shortest-path convention. Edge weights
 are converted from MI similarity to distance as
 \code{(1 - mi) / mi} before shortest paths are calculated.
+Unlike \code{igraph::betweenness(normalized = TRUE)}, NETSCOPE
+normalizes by \code{n * (n - 1) / 2}, rather than
+\code{(n - 1) * (n - 2) / 2} for undirected networks.
 }
 
 \seealso{

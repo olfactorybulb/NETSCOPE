@@ -11,11 +11,9 @@ shortestpath(mi, source, target = -1)
 
 \item{source}{Source node index (1-based).}
 
-\item{target}{Optional target node index (1-based). When left at its
-default (\code{-1}, which never matches a real node index), the
-shortest path from \code{source} to every other node is computed
-instead of stopping at a single target — mirroring MATLAB's
-\code{nargin == 2} branch.}
+\item{target}{Optional target node index (1-based). If omitted
+(default \code{-1}), shortest paths from \code{source} to all
+nodes are computed.}
 }
 \value{
 A list with:
@@ -34,6 +32,11 @@ distances between the nodes along the path. The shortest path is the one
 minimizing this total length. Distance between nodes is defined as the
 ratio of Variation of Information (VI, \code{1 - mi}) to Mutual
 Information (\code{mi}).
+}
+\details{
+MI values are clamped to the interval \code{[0, 1]} before
+calculating distances, consistent with \code{get_pathlength()}.
+Zero MI values correspond to infinite distances.
 }
 \seealso{
 \code{get_pathlength}, \code{kshortestpaths}, \code{get_dos_matrix}

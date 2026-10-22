@@ -7,7 +7,7 @@
 get_localcc(mi)
 }
 \arguments{
-\item{mi}{MI/network matrix.}
+\item{mi}{Symmetric MI/network matrix.}
 }
 \value{
 Numeric vector of length \code{n}, the local clustering
@@ -17,7 +17,8 @@ undefined (0/0) coefficient, reported as \code{0}.
 \description{
 For each node, measures how interconnected its neighbors are with each
 other, relative to the maximum possible number of connections among
-them.
+them. The calculation uses a binary definition. Edges with positive MI
+weights are treated as present, regardless of their magnitude.
 }
 \seealso{
 \code{get_globalcc}, \code{get_centrality}

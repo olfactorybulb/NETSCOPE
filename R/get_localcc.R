@@ -2,9 +2,10 @@
 #'
 #' For each node, measures how interconnected its neighbors are with each
 #' other, relative to the maximum possible number of connections among
-#' them.
+#' them. The calculation uses a binary definition. Edges with positive MI
+#' weights are treated as present, regardless of their magnitude.
 #'
-#' @param mi MI/network matrix.
+#' @param mi Symmetric MI/network matrix.
 #'
 #' @return Numeric vector of length \code{n}, the local clustering
 #'   coefficient for each node. Nodes with 0 or 1 neighbors have an

@@ -1,9 +1,7 @@
 #' Calculate global clustering coefficient
 #'
-#' Counts triangles in the network (each triangle counted exactly once, via
-#' the edge connecting its two largest-indexed nodes, searching for the
-#' third/smallest-indexed node as a shared neighbor), then normalizes by
-#' the total number of possible node triples.
+#' Counts the number of triangles in an undirected network and divides
+#' by the total number of possible node triples.
 #'
 #' @param mi MI/network matrix.
 #'
@@ -19,7 +17,10 @@
 #' with clustering coefficients computed using the standard transitivity
 #' definition.
 #'
-#' @seealso \code{get_localcc}
+#' The \code{gcc} value returned by \code{sparsify_network()} uses the same
+#' definition and is calculated from the original network before sparsification.
+#'
+#' @seealso \code{get_localcc}, \code{sparsify_network}
 #' @family networkanalysis
 #' @export
 get_globalcc <- function(mi) {

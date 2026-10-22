@@ -1,17 +1,27 @@
-#' Remove indirect links from the network using network sparsification
+#' Remove potentially indirect links using network sparsification
 #'
-#' Removes links from the network that are the result of indirect
-#' correlations, via sparsification based on the Data Processing
-#' Inequality. Iterates over all triangles in the network and removes the
-#' weakest link in each. Also used to calculate the network Global
-#' Clustering Coefficient (GCC).
+#' Applies a Data Processing Inequality (DPI)-based heuristic to sparsify
+#' a weighted MI network. For each triangle, the weakest edge is removed
+#' when it is strictly weaker than the other two edges.
+#' Also calculates the global clustering coefficient of the original network.
 #'
 #' @param mi Network (MI) matrix. Assumed symmetric.
 #'
 #' @return A list with:
 #'   \item{sps}{Sparsified network matrix.}
-#'   \item{gcc}{Global clustering coefficient.}
+#'   \item{gcc}{Triangle count of the original network divided by
+#'     \code{choose(n, 3)}, consistent with \code{get_globalcc()}.}
 #'
+#' @details
+#' All triangles are evaluated using the original MI matrix, rather than
+#' the progressively sparsified network. Edge removal therefore does not
+#' affect subsequent triangle evaluations.
+#'
+#' An edge is removed only when its weight is strictly smaller than both
+#' other edges in a triangle. Ties for the weakest edge are retained.
+#' No tolerance is applied when comparing edge weights.
+#'
+#' @seealso \code{get_globalcc}
 #' @export
 sparsify_network <- function(mi) {
 

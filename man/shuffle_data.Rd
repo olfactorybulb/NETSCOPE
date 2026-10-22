@@ -2,20 +2,47 @@
 % Please edit documentation in R/shuffle_data.R
 \name{shuffle_data}
 \alias{shuffle_data}
-\title{Shuffle variables within each sample}
+\title{Shuffle data for permutation-based analyses}
 \usage{
-shuffle_data(data)
+shuffle_data(data, margin = c("variables", "samples"))
 }
 \arguments{
-\item{data}{Data matrix (rows are variables, columns are samples).}
+\item{data}{Numeric matrix (rows = variables, columns = samples).}
+
+\item{margin}{Character string specifying the permutation method.
+\code{"variables"} (default) shuffles observations independently
+within each variable (row), preserving variable-wise marginal
+distributions. \code{"samples"} shuffles values across variables
+independently within each sample (column), preserving the set of
+values within each sample.}
 }
 \value{
 Shuffled data matrix with the same dimensions as \code{data}.
 }
 \description{
-Randomly permutes the values across variables within each column of the
-data matrix. Each column is shuffled independently, preserving the set
-of observed values within each sample while changing their assignment
-to variables.
+Randomly permutes values within each variable or sample of a data
+matrix. By default, observations are shuffled independently within
+each variable (row), preserving each variable's marginal distribution
+while disrupting the alignment between variables across samples.
+}
+\details{
+Within-variable permutation is commonly used to construct null
+distributions for mutual information, as it preserves the marginal
+distribution of each variable while disrupting cross-variable
+associations.
+
+Within-sample permutation assumes that variables are exchangeable
+and may be inappropriate when variables are measured on different
+scales, such as age, cognitive scores, and questionnaire ratings.
+}
+\examples{
+x <- matrix(1:12, nrow = 3)
+
+set.seed(123)
+shuffle_data(x)
+
+set.seed(123)
+shuffle_data(x, margin = "samples")
+
 }
 \concept{expressiondata}

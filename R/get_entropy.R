@@ -2,7 +2,9 @@
 #'
 #' Computes the Shannon entropy of each variable from its probability
 #' distribution. Entropy is calculated using the natural logarithm and is
-#' therefore expressed in nats.
+#' therefore expressed in nats. The choice of logarithm base does not
+#' affect normalized mutual information, provided the same base is used
+#' consistently for entropy and mutual information.
 #'
 #' @param px List of per-variable probability distributions, as produced by
 #'   \code{get_distributions()}.

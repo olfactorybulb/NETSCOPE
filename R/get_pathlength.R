@@ -12,18 +12,16 @@
 #' @return If \code{p} was a single path, a single number. If \code{p} was
 #'   a list of paths, a numeric vector of pathlengths, one per path.
 #'
-#' @section Note:
-#' Unlike \code{shortestpath()}, this function does not clamp \code{mi}
-#' values greater than 1 before computing distances. Therefore, if
-#' \code{mi} contains values greater than 1, path lengths returned by this
-#' function may differ from those computed by \code{shortestpath()} for
-#' the same path.
+#' @details
+#' MI values are clamped to the interval \code{[0, 1]} before
+#' calculating distances, consistent with \code{shortestpath()}.
+#' Zero MI values correspond to infinite distances.
 #'
 #' @seealso \code{shortestpath}, \code{kshortestpaths}
 #' @family networkanalysis
 #' @export
 get_pathlength <- function(mi, p) {
-  dist <- (1 - mi) / mi
+  dist <- .mi_to_distance(mi)
 
   was_list <- is.list(p)
   if (!was_list) p <- list(p)
@@ -31,7 +29,7 @@ get_pathlength <- function(mi, p) {
   d <- numeric(length(p))
   for (i in seq_along(p)) {
     pi <- p[[i]]
-    if (is.null(pi) || length(pi) < 2) next  # stays 0, matches MATLAB's empty-path behavior
+    if (is.null(pi) || length(pi) < 2) next  # Empty paths have length 0
     for (j in 2:length(pi)) {
       d[i] <- d[i] + dist[pi[j - 1], pi[j]]
     }

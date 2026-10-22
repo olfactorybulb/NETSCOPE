@@ -17,12 +17,17 @@ case), matching the two-argument call used elsewhere (e.g.
 }
 \value{
 A list with:
-\item{mi}{Normalized MI matrix.}
-\item{dist}{Normalized VI distance matrix (\code{VI / MI}).}
+\item{mi}{Normalized, dimensionless MI matrix.}
+\item{dist}{Distance matrix calculated as normalized VI / normalized MI.}
 }
 \description{
-Normalizes an MI matrix with respect to the joint entropy, calculates
-the Variation of Information (VI) matrix (which measures information
-distance, as opposed to MI which measures information similarity), and
-calculates the distance matrix VI / MI.
+Normalizes an MI matrix with respect to joint entropy, calculates
+normalized Variation of Information (VI) as \code{1 - MI}, and
+calculates the distance matrix \code{VI / MI}.
+}
+\details{
+Mutual information and entropy are calculated using natural logarithms
+(nats). Normalized MI and the resulting distance matrix are dimensionless
+and invariant to the choice of logarithm base, provided the same base
+is used consistently.
 }

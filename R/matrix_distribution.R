@@ -5,11 +5,9 @@
 #' read and processed in row batches. This function assumes the data is
 #' confined to the interval \code{[0, 1]}.
 #'
-#' @param file Optional path to a \pkg{bigmemory} disk-backed matrix (the
-#'   same \code{file} base path/naming convention used by
-#'   \code{compute_MI_PP()}: \code{paste0(basename(file), ".desc")} is
-#'   attached via \code{bigmemory::attach.big.matrix()}). Required if
-#'   \code{mat} is not specified.
+#' @param file Optional path, without extension, to a \pkg{bigmemory}
+#'   backing file created by NETSCOPE. Required if \code{mat} is not
+#'   specified.
 #' @param mat Optional in-memory matrix. Required if \code{file} is not
 #'   specified.
 #' @param batch Batch size for reading rows at a time. Default 4000.
@@ -19,16 +17,14 @@
 #'   \item{px}{Data distribution -- vector of bin counts.}
 #'   \item{ex}{Bin edges.}
 #'
-#' @section Deviations from the MATLAB source:
-#' The \code{file} argument no longer refers to a MATLAB \code{.mat} file
-#' -- there's no straightforward way to read a \code{.mat} file in batches
-#' from R without loading it entirely into memory first, which would
-#' defeat this function's purpose. Instead, \code{file} refers to one of
-#' this package's own \pkg{bigmemory}-backed matrices (as used elsewhere,
-#' e.g. by \code{compute_MI_PP()}). The \code{varname} argument from the
-#' MATLAB version is dropped entirely, since a \pkg{bigmemory} backing file
-#' holds exactly one matrix (no named-variable selection needed, unlike a
-#' MATLAB \code{.mat} file which can hold several).
+#' @examples
+#' # Create a matrix with values between 0 and 1
+#' set.seed(123)
+#' mat <- matrix(runif(100), nrow = 10)
+#'
+#' # Compute the distribution
+#' result <- matrix_distribution(mat = mat)
+#' result$px
 #'
 #' @family other
 #' @export

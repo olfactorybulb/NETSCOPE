@@ -14,10 +14,8 @@ A numeric scalar giving the global clustering coefficient as
 defined in the normalization section below.
 }
 \description{
-Counts triangles in the network (each triangle counted exactly once, via
-the edge connecting its two largest-indexed nodes, searching for the
-third/smallest-indexed node as a shared neighbor), then normalizes by
-the total number of possible node triples.
+Counts the number of triangles in an undirected network and divides
+by the total number of possible node triples.
 }
 \section{Note on normalization}{
 
@@ -28,10 +26,13 @@ which normalizes by the number of connected triples (paths of length 2).
 Therefore, values returned by this function are not directly comparable
 with clustering coefficients computed using the standard transitivity
 definition.
+
+The \code{gcc} value returned by \code{sparsify_network()} uses the same
+definition and is calculated from the original network before sparsification.
 }
 
 \seealso{
-\code{get_localcc}
+\code{get_localcc}, \code{sparsify_network}
 
 Other networkanalysis: 
 \code{\link{export_network}()},

@@ -10,11 +10,13 @@ Authors@R: c(
     person("Tousif", "Jamal", role = "aut"),
     person("Aya", "Rezeika", role = "aut")
     )
-Description: Provides tools for constructing and analyzing networks using
-    information-theoretic measures. The package estimates mutual information
-    from continuous data, supports permutation-based network sparsification,
-    and provides functions for network topology and path analysis. Batch and
-    parallel processing are available for larger datasets.
+Description: Constructs and analyzes networks from pairwise mutual information.
+    Variables are descretized with the Freedman-Diaconis or Sturges rule,
+    mutual information is estimated with a plug-in estimator and normalized by
+    joing entropy, and indirect links can be pruned with the data processing
+    inequality. Includes shuffled-data generation for null distributions, network
+    topology and path statistics, GEXF export, and disk-backed batch and parallel
+    computation for large datasets.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

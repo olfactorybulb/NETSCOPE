@@ -22,6 +22,10 @@
 #' \code{stats::IQR()} (type 7), to maintain numerical compatibility with
 #' the MATLAB implementation of NETSCOPE.
 #'
+#' When the Freedman-Diaconis rule produces a nonpositive bin width,
+#' the function falls back to one-tenth of the observed data range.
+#' If this is also nonpositive, a bin width of 2 is used.
+#'
 #' @seealso get_entropy
 #'
 #' @export

@@ -2,9 +2,9 @@
 % Please edit documentation in R/compute_MI.R
 \name{compute_MI}
 \alias{compute_MI}
-\title{Compute mutual information (MI) matrix from continuous data}
+\title{Compute mutual information (MI) matrix from numeric data}
 \usage{
-compute_MI(data, px = NULL, ex = NULL, h = NULL)
+compute_MI(data, px = NULL, ex = NULL, h = NULL, binning = "freedman")
 }
 \arguments{
 \item{data}{Numeric matrix (rows = variables, columns = samples). Required.}
@@ -18,10 +18,14 @@ Required if \code{px} is supplied.}
 
 \item{h}{Optional numeric vector of per-variable entropies, as produced by
 \code{get_entropy()}. Computed if not supplied.}
+
+\item{binning}{Binning rule: \code{"freedman"} (default) or
+\code{"sturges"}. Used only when \code{px} is NULL.}
 }
 \value{
 A symmetric numeric matrix containing pairwise MI values,
-normalized with respect to joint entropy.
+normalized with respect to joint entropy. The normalized MI values
+are dimensionless.
 }
 \description{
 Computes an MI matrix where each entry (i, j) is the mutual information
@@ -33,9 +37,12 @@ memory, where no parallel/batch processing is needed.
 set.seed(123)
 data <- matrix(rnorm(300), nrow = 3)
 
-# Compute the MI matrix
+# Compute the MI matrix using default Freedman-Diaconis binning
 mi <- compute_MI(data)
 mi
+
+# Alternatively, use Sturges binning
+mi_sturges <- compute_MI(data, binning = "sturges")
 
 # Alternatively, supply precomputed distributions and entropies
 distributions <- get_distributions(data)

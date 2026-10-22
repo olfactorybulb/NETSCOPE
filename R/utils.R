@@ -86,3 +86,9 @@
   q <- stats::quantile(x, c(0.25, 0.75), type = 5, names = FALSE)
   q[2] - q[1]
 }
+
+# Convert MI similarity to distance
+.mi_to_distance <- function(mi) {
+  mi <- pmin(pmax(mi, 0), 1)
+  (1 - mi) / mi
+}

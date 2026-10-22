@@ -1,4 +1,4 @@
-#' Compute mutual information (MI) matrix from continuous data, in batches
+#' Compute mutual information (MI) matrix from numeric data, in batches
 #'
 #' Computes a normalized MI matrix where each entry (i, j) is the MI
 #' between variables i and j. Intended for datasets too large to comfortably
@@ -17,13 +17,14 @@
 #' @param h Optional numeric vector of per-variable entropies, as produced
 #'   by \code{get_entropy()}. Computed if not supplied.
 #' @param batch Batch size. Default \code{1000}.
-#' @param pp Whether to use parallel processing via \code{compute_MI_PP()}.
-#'   Default \code{FALSE}.
+#' @param pp Whether to use parallel processing. Default \code{FALSE}.
 #' @param fetch Whether to wait for parallel processing to finish before
 #'   returning. Only relevant when \code{pp = TRUE}. Default \code{TRUE}.
 #' @param cont Whether to continue from a previous, unfinished run (attaches
 #'   to the existing backing file instead of reallocating). Default
 #'   \code{FALSE}.
+#' @param binning Binning rule: \code{"freedman"} (default) or
+#'   \code{"sturges"}. Used only when \code{px} is NULL.
 #'
 #' @return Invisibly, a \code{big.matrix} object containing the disk-backed
 #'   MI matrix. The matrix data are stored at \code{<file>.bin}.
@@ -45,11 +46,11 @@
 #' @export
 compute_MI_batch <- function(data, file, px = NULL, ex = NULL, h = NULL,
                              batch = 1000, pp = FALSE, fetch = TRUE,
-                             cont = FALSE) {
+                             cont = FALSE, binning = "freedman") {
 
   ## Parse arguments, compute px, h if necessary ------------------------------
   if (is.null(px)) {
-    distributions <- get_distributions(data)
+    distributions <- get_distributions(data, binning = binning)
     px <- distributions$px
     ex <- distributions$ex
   }

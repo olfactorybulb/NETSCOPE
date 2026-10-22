@@ -22,15 +22,11 @@ The pathlength is the sum of the distances between the nodes along the
 path. Distance is the ratio of Variation of Information (VI,
 \code{1 - mi}) to Mutual Information (\code{mi}).
 }
-\section{Note}{
-
-Unlike \code{shortestpath()}, this function does not clamp \code{mi}
-values greater than 1 before computing distances. Therefore, if
-\code{mi} contains values greater than 1, path lengths returned by this
-function may differ from those computed by \code{shortestpath()} for
-the same path.
+\details{
+MI values are clamped to the interval \code{[0, 1]} before
+calculating distances, consistent with \code{shortestpath()}.
+Zero MI values correspond to infinite distances.
 }
-
 \seealso{
 \code{shortestpath}, \code{kshortestpaths}
 
