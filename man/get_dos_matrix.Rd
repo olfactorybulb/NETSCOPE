@@ -15,10 +15,12 @@ An \code{n x n} DOS matrix, same size as \code{mi}, where entry
 \code{i} to node \code{j}.
 }
 \description{
-Computes the DOS -- the minimum number of steps (edges) necessary to get
-from one network node to another -- for all pairs of nodes. The DOS is
-the unweighted equivalent of the shortest path: it only counts the
-number of edges, not their weight.
+Computes the degree of separation (DOS), defined as the minimum number
+of steps (edges) necessary to travel between two nodes in a network.
+DOS is the unweighted equivalent of the shortest-path distance, as it
+considers only the number of edges and not their weights. This function
+computes the DOS for all pairs of nodes and returns a matrix with the
+same dimensions as the input matrix.
 }
 \details{
 This works by setting every nonzero MI value to exactly \code{0.5}
