@@ -24,7 +24,7 @@
 #'
 #' # Compute the distribution
 #' result <- matrix_distribution(mat = mat)
-#' result$px
+#' head(result$px)
 #'
 #' @family other
 #' @export

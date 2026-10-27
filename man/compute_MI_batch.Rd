@@ -64,7 +64,7 @@ set.seed(123)
 data <- matrix(rnorm(300), nrow = 3)
 
 # Store the disk-backed MI matrix in a temporary directory
-file <- file.path(tempdir(), "netscope_mi")
+file <- tempfile(pattern = "netscope_mi_")
 mi <- compute_MI_batch(data, file, batch = 2)
 
 # Access the resulting matrix

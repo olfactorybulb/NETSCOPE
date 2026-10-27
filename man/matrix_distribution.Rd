@@ -36,7 +36,7 @@ mat <- matrix(runif(100), nrow = 10)
 
 # Compute the distribution
 result <- matrix_distribution(mat = mat)
-result$px
+head(result$px)
 
 }
 \seealso{

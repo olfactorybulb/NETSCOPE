@@ -26,7 +26,7 @@ For every node, calculate the "betweenness centrality": a measure of how
 important a node's role is in the global network structure, based on how
 often it lies on the shortest path between other pairs of nodes.
 }
-\section{Comparison with \code{igraph}{
+\section{Comparison with \code{igraph}}{
 
 This calculation is conceptually similar to
 \code{igraph::betweenness()}, but retains the original NETSCOPE

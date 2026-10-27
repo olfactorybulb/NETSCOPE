@@ -16,7 +16,7 @@
 #'   Betweenness counts are divided by \code{n * (n - 1) / 2},
 #'   the total number of unordered node pairs.
 #'
-#' @section Comparison with \code{igraph:
+#' @section Comparison with \code{igraph}:
 #' This calculation is conceptually similar to
 #' \code{igraph::betweenness()}, but retains the original NETSCOPE
 #' implementation to preserve its shortest-path convention. Edge weights
