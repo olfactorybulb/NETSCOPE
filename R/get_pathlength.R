@@ -6,8 +6,9 @@
 #'
 #' @param mi MI/network matrix.
 #' @param p Either a single path (integer vector of node indices), or a
-#'   list of paths. List entries may be \code{NULL} (e.g. unused/unfound
-#'   paths from \code{kshortestpaths()}) -- these contribute a length of 0.
+#'   list of paths. List entries may be \code{NULL} (e.g., unused or
+#'   unavailable paths from \code{kshortestpaths()}); these contribute
+#'   a length of 0.
 #'
 #' @return If \code{p} was a single path, a single number. If \code{p} was
 #'   a list of paths, a numeric vector of pathlengths, one per path.

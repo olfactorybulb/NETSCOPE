@@ -10,8 +10,9 @@ get_pathlength(mi, p)
 \item{mi}{MI/network matrix.}
 
 \item{p}{Either a single path (integer vector of node indices), or a
-list of paths. List entries may be \code{NULL} (e.g. unused/unfound
-paths from \code{kshortestpaths()}) -- these contribute a length of 0.}
+list of paths. List entries may be \code{NULL} (e.g., unused or
+unavailable paths from \code{kshortestpaths()}); these contribute
+a length of 0.}
 }
 \value{
 If \code{p} was a single path, a single number. If \code{p} was
