@@ -1,59 +1,61 @@
 # NETSCOPE
+An R package for information-theoretic network construction and analysis.
 
-An R package for information theoretical analysis of molecular networks.
-This is an R port of the original [NETSCOPE MATLAB/Octave/Python
-toolbox](https://github.com/DepartmentofNeurophysiology/NETSCOPE), ported
-from the toolbox's master branch with help from Claude.
+NETSCOPE is an R port of the original [NETSCOPE MATLAB/Octave/Python toolbox](https://github.com/DepartmentofNeurophysiology/NETSCOPE), developed with assistance from Claude.
 
 ## Introduction
 
-NETSCOPE can be used for network construction and analysis from a wide
-variety of biological data. Applications range from constructing gene
-co-expression networks and using topological patterns to identify genes
-or pathways of interest, to identifying functional links in fMRI- and
-EEG-based networks. The pipeline computes pairwise mutual information
-between variables, sparsifies the resulting network using a Data
-Processing Inequality (DPI)-based approach, and provides a suite of
-network analysis tools (centrality, shortest paths, connected components,
-clustering coefficients, and more).
+NETSCOPE supports network construction and analysis across a wide variety of biological data. Applications include constructing gene co-expression networks, identifying genes or pathways of interest through network topology, and examining functional connectivity in fMRI and EEG data.
 
-This package is plug-and-play — install it and start importing your data.
+The package computes pairwise mutual information (MI) between variables, sparsifies the resulting networks using the Data Processing Inequality (DPI), and provides tools for network analysis, including centrality measures, shortest paths, connected components, and clustering coefficients.
 
 ## Installation
 
-Install directly from GitHub:
+Once NETSCOPE is available on CRAN, install it using:
 
 ```r
-# install.packages("devtools")
-devtools::install_github("olfactorybulb/NETSCOPE")
+install.packages("NETSCOPE")
+```
+
+Alternatively, install the development version from GitHub:
+
+```r
+# install.packages("remotes")
+remotes::install_github("Neuronext/NETSCOPE-R")
 ```
 
 ## Documentation
 
-![Workflow](https://github.com/DepartmentofNeurophysiology/NETSCOPE/blob/master/Documentation/workflow.png)
+![NETSCOPE workflow](man/figures/workflow.png)
 
-Use `?<function>` or `help(<function>)` in R to see detailed
+For function-specific documentation, use `?<function>` or `help(<function>)` to see detailed
 documentation for any function in the package.
 
-## Supporting data
+```r
+?compute_MI
+?normalize_MI
+?sparsify_network
+```
 
-### Network construction from synthetic data
+## Example
 
-`synthetic_data.R` contains everything necessary to recreate the
-synthetic-data network construction analysis from the original manuscript
-(Figure 3). The code generates synthetic expression data from a ground
-truth network, constructs an MI-based network, and compares it to the
-ground truth network. See the `synthetic-data-validation` vignette for a
-narrative walkthrough with plots, and `plot_synthetic_data.R` for
-standalone plotting.
+The following example demonstrates how to construct a mutual information (MI) matrix from a small synthetic dataset.
 
-### Network construction from yeast expression data
+```r
+library(NETSCOPE)
 
-As in the original toolbox, `yeast_data.mat` contains the gene expression
-data from Ziemann et al., and the co-expression network data from
-YeastNet v3 (see Table 1 of the manuscript for details on the network
-data). This package includes `R.matlab` as a dependency so this `.mat`
-file can be read directly into R.
+# Generate example data (variables in rows, observations in columns)
+set.seed(123)
+data <- matrix(rnorm(300), nrow = 3)
+
+# Compute pairwise mutual information
+mi <- compute_MI(data)
+
+# Display the MI matrix
+mi
+```
+
+By default, `compute_MI()` uses the Freedman–Diaconis rule to determine the number of bins for estimating mutual information. Alternative binning methods, such as Sturges' rule, are also available.
 
 ## Manuscript
 
@@ -61,11 +63,8 @@ Bergmans T, Jamal T, Rezeika A, Hsing C, Celikel T. 2026. "NETSCOPE:
 Information-Theory Based Network Discovery and Analysis" *(in
 submission)*
 
-## Author
+## Authors
 
-This R port is maintained at the [Georgia Institute of Technology, School
-of Psychology and Brain Sciences](https://github.com/olfactorybulb).
+The R implementation was developed at the Georgia Institute of Technology, School of Psychology and Brain Sciences, based on the original NETSCOPE toolbox.
 
----
-
-<!-- This R port was developed with assistance from Claude (Anthropic).  -->
+See the package `DESCRIPTION` file for the complete list of contributors.
