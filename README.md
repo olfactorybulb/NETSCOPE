@@ -59,9 +59,7 @@ By default, `compute_MI()` uses the Freedman–Diaconis rule to determine the nu
 
 ## Manuscript
 
-Bergmans T, Jamal T, Rezeika A, Hsing C, Celikel T. 2026. "NETSCOPE:
-Information-Theory Based Network Discovery and Analysis" *(in
-submission)*
+Bergmans, T., Jamal, T., Rezeika, A., Hsing, C.-C., & Celikel, T. (2026). *NETSCOPE: Information-Theory Based Network Discovery and Analysis* (Version 3) [Preprint]. bioRxiv. https://doi.org/10.1101/2022.04.18.488630
 
 ## Authors
 
