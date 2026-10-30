@@ -2,9 +2,9 @@ Package: NETSCOPE
 Title: Information-Theoretic Network Construction and Analysis
 Version: 0.1.0
 Authors@R: c(
-    person("Tansu", "Celikel", email = "celikel@gatech.edu", role = "aut"),
+    person("Tansu", "Celikel", email = "celikel@gatech.edu", role = c("aut", "cre")),
     person("Dingjing", "Shi", email = "dshi32@gatech.edu", role = "aut"),
-    person("Chih-Chia", "Hsing", email = "jesscc.hsing@gmail.com", role = c("aut", "cre")),
+    person("Chih-Chia", "Hsing", email = "jesscc.hsing@gmail.com", role = "aut"),
     person("Tido", "Bergmans", role = "aut"),
     person("Tousif", "Jamal", role = "aut"),
     person("Aya", "Rezeika", role = "aut")
